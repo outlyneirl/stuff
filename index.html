@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>notes</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: #f9f9f9;
+      color: #111;
+    }
+    header {
+      padding: 16px;
+      font-size: 20px;
+      font-weight: bold;
+      background: #fff;
+      border-bottom: 1px solid #ddd;
+      position: sticky;
+      top: 0;
+    }
+    #editor {
+      width: 100%;
+      min-height: calc(100vh - 60px);
+      padding: 20px;
+      box-sizing: border-box;
+      outline: none;
+      font-size: 16px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    #editor:empty:before {
+      content: "Start typing your notes...";
+      color: #999;
+    }
+  </style>
+</head>
+<body>
+  <header>inf text</header>
+  <div id="editor" contenteditable="true" spellcheck="true"></div>
+
+  <script>
+    const editor = document.getElementById('editor');
+
+    // Save notes locally as you type
+    editor.addEventListener('input', () => {
+      localStorage.setItem('infiniteNotes', editor.innerHTML);
+    });
+
+    // Load saved notes when you open the page
+    window.onload = () => {
+      editor.innerHTML = localStorage.getItem('infiniteNotes') || '';
+    };
+  </script>
+</body>
+</html>
